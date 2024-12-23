@@ -1,0 +1,182 @@
+only_rules:
+    - attributes
+    - class_delegate_protocol
+    - closing_brace
+    - closure_parameter_position
+    - closure_spacing
+    - collection_alignment
+    - colon
+    - comma
+    - comment_spacing
+    - computed_accessors_order
+    - conditional_returns_on_newline
+    - convenience_type
+    - contains_over_filter_count
+    - contains_over_first_not_nil
+    - contains_over_range_nil_comparison
+    - control_statement
+    - custom_rules
+    - cyclomatic_complexity
+    - discouraged_direct_init
+    - duplicate_imports
+    - empty_collection_literal
+    - empty_count
+    - empty_parameters
+    - empty_parentheses_with_trailing_closure
+    - empty_string
+    - explicit_init
+    - file_length
+    - first_where
+    - for_where
+    - force_cast
+    - force_try
+    - force_unwrapping
+    - function_parameter_count
+    - identical_operands
+    - implicit_getter
+    - implicitly_unwrapped_optional
+    - last_where
+    - leading_whitespace
+    - legacy_cggeometry_functions
+    - legacy_constant
+    - legacy_constructor
+    - legacy_hashing
+    - legacy_nsgeometry_functions
+    - line_length
+    - literal_expression_end_indentation
+    - mark
+    - multiline_arguments
+    - no_space_in_method_call
+    - opening_brace
+    - operator_usage_whitespace
+    - operator_whitespace
+    - prefer_zero_over_explicit_init
+    - protocol_property_accessors_order
+    - reduce_boolean
+    - redundant_discardable_let
+    - redundant_nil_coalescing
+    - redundant_optional_initialization
+    - redundant_string_enum_value
+    - redundant_type_annotation
+    - redundant_void_return
+    - return_arrow_whitespace
+    - shorthand_operator
+    - statement_position
+    - superfluous_else
+    - switch_case_alignment
+    - syntactic_sugar
+    - todo
+    - trailing_comma
+    - trailing_newline
+    - trailing_semicolon
+    - trailing_whitespace
+    - toggle_bool
+    - unneeded_break_in_switch
+    - unused_import
+    - unused_optional_binding
+    - unused_setter_value
+    - vertical_parameter_alignment
+    - vertical_parameter_alignment_on_call
+    - vertical_whitespace
+    - void_function_in_ternary
+    - void_return
+    - yoda_condition
+
+disabled_rules: # rule identifiers to exclude from running
+
+opt_in_rules: # some rules are only opt-in
+
+excluded: # paths to ignore during linting. Takes precedence over `included`.
+    - fastlane
+    - .bundle
+    - .swiftpm
+    - .build
+    - buildData
+    - UnitTests
+    - Modules/App/Playbook/Documentation
+    - Modules/App/Example/Documentation
+
+custom_rules:
+    image_name_initialization: # Disable UIImage init from name
+        included: ".*.swift"
+        name: "Image initialization"
+        regex: 'UIImage\(named:[^)]+\)'
+        message: "Use UIImage(assetName: ) instead"
+        severity: error
+
+    realm_in_ui:
+        included: "Screens/.*.swift|User Stories/.*.swift"
+        name: "Realm can be used only in services"
+        regex: "Realm"
+        message: "Realm can be used only in serivces"
+        severity: error
+
+    router_protocol_error:
+        included: ".*RouterInput.swift"
+        name: "View in Router protocol"
+        regex: "view|View"
+        message: "Router protocol methods should contains `Module` instead `View`"
+        severity: error
+
+    open_iboutlets:
+        included: ".*.swift"
+        name: "IBOutlet opening"
+        regex: "@IBOutlet ?(weak){0,1} var"
+        message: "IBOutlet should be private or fileprivate"
+        severity: error
+
+    mark_newlines:
+        included: ".*.swift"
+        name: "MARK newlines surrounding"
+        regex: '(([}{)\w \t]+\n{1}[ \t]*)(\/\/ MARK: - [\w ]*))|((\/\/ MARK: - [\w ]*)(\n{1}[ \t]*\w+))'
+        message: "Every MARK should be surrounded with 1 newline before and 1 after it"
+        severity: warning
+
+    class_modificators_order:
+        include: ".*.swift"
+        name: "Class modificators order"
+        regex: "final (public|private|open)"
+        message: "Modificator should precede keyword final"
+
+    func_modificators_order:
+        include: ".*.swift"
+        name: "Func modificators order"
+        regex: "(static|class) (public|private|open) func"
+        message: "Modificator should precede keyword static or class"
+
+    subclass_func_modificator_order:
+        include: ".*.swift"
+        name: "Subclass func modificators order"
+        regex: "(public|private|open) override func"
+        message: "Keyword override should precede modificator"
+
+    swiftgen_fonts:
+        name: "SwiftGen Fonts"
+        regex: 'UIFont(\.init)?\(name: ?"?.+"?, ?size:.+?\)'
+        message: "Use FontFamily.<family>.<variant>.size(<size>) instead"
+        severity: error
+
+    swiftgen_assets:
+        name: "SwiftGen Assets"
+        regex: '(UIImage|UIColor)(\.init)?\(named: ?"?.+"?(, ?in:.+?, ?compatibleWith:.+?)?\)|#imageLiteral\(resourceName: ?".+"\)'
+        message: "Use Asset.<asset> instead"
+        severity: error
+
+    swiftgen_colors:
+        name: "SwiftGen Colors"
+        regex: '(UIColor(\.init)?|#colorLiteral)\(((red|displayP3Red):.+?,green:.+?,blue:.+?,alpha:.+?)|(white:.+?,alpha:.+?)|(hue:.+?,saturation:.+?,brightness:.+?,alpha:.+?)\)'
+        message: "Use ColorName.<color> instead"
+        severity: error
+
+    big_conditional_returns_on_newline:
+        name: "Conditional Returns on Newline"
+        message: "Conditional statements should always return on the next line"
+        regex: '(guard|if)[^\n]{40,}return'
+
+line_length: 120
+
+file_length:
+    warning: 600
+    error: 1200
+
+reporter: "xcode" # reporter type (xcode, json, csv, checkstyle, junit)

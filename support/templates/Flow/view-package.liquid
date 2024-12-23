@@ -1,0 +1,31 @@
+// swift-tools-version: 5.9
+// The swift-tools-version declares the minimum version of Swift required to build this package.
+
+import PackageDescription
+
+let package = Package(
+    name: "{{ name }}Flow",
+    platforms: [.iOS(.v16)],
+    products: [
+        .library(
+            name: "{{ name }}Flow",
+            targets: ["{{ name }}Flow"])
+    ],
+    dependencies: [
+        .package(path: "../{{ name }}State"),
+        .package(path: "../../../Middle/Library")
+    ],
+    targets: [
+        .target(
+            name: "{{ name }}Flow",
+            dependencies: ["Library"]
+        ),
+        .testTarget(
+            name: "{{ name }}FlowTests",
+            dependencies: [
+                "{{ name }}Flow",
+                .product(name: "LibraryTestSupport",
+                         package: "Library")
+            ])
+    ]
+)

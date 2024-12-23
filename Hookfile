@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+# List possible JIRA Project IDs
+PROJECT_IDS="SNP|STP"
+
+# List branches for which the commit message format will be ignored
+BRANCHES_TO_SKIP="main|ci"
+
+# List allowed commit message prefixes
+WHITELIST_COMMIT_MSG="Merge.*|Version Bump.*|#Tech.*"

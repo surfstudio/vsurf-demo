@@ -1,0 +1,62 @@
+include:
+  - path: ../templates.yml
+    relativePaths: true
+
+# Зависимости
+packages:
+  Library:
+    path: ../../Middle/Library
+  # В идеале держать тут только зависимости от Flow
+
+# Настройки проекта
+name: {{ name }}
+options:
+  xcodeVersion: 15.3.0
+  # Создание пустых директорий
+  generateEmptyDirectories: true
+  # Создание групп
+  createIntermediateGroups: true
+settings:
+  DEVELOPMENT_TEAM: EFAAG9GXN4
+
+# Таргеты
+targets:
+
+    {{ name }}:
+      scheme:
+          configVariants: all
+          testTargets:
+            - {{ name }}UITests
+          gatherCoverageData: true
+      dependencies:
+        - package: Library
+          product: Library
+      sources:
+        - path: Sources
+        - path: {{ name }}App.docc
+      info:
+        path: Info.plist
+      templates:
+        - BaseApp
+        - BaseSettings
+      templateAttributes:
+        bundle_id: dev.surf.sui-core.{{ name }}
+        bundle_name: SUI-{{ name }}
+
+    {{ name }}UITests:
+      templates:
+        - BaseUITest
+        - BaseSettings
+      templateAttributes:
+        bundle_id: dev.surf.sui-core.{{ name }}-ui-tests
+      dependencies:
+        - target: {{ name }}
+        - package: Library
+          product: LibraryTestSupport
+      sources: Tests/UI
+      info:
+        path: Tests/UI/Info.plist
+      settings:
+        configs:
+          Debug:
+            TEST_TARGET_NAME: {{ name }}

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Time.After.seconds</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@Seconds@</string>
+		<key>Seconds</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>u</string>
+			<key>one</key>
+			<string>%u секунду</string>
+			<key>few</key>
+			<string>%u секунды</string>
+			<key>many</key>
+			<string>%u секунд</string>
+		</dict>
+	</dict>
+	<key>Time.After.minutes</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@Minutes@</string>
+		<key>Minutes</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>u</string>
+			<key>one</key>
+			<string>%u минуту</string>
+			<key>few</key>
+			<string>%u минуты</string>
+			<key>many</key>
+			<string>%u минут</string>
+		</dict>
+	</dict>
+</dict>
+</plist>

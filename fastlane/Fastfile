@@ -1,0 +1,68 @@
+# Project Template
+
+# Schemes
+project_scheme = "Example"
+
+# Project Info
+workspace = "SUI-core.xcworkspace"
+
+derived_data_path = "./buildData"
+result_bundle_path = "./buildData/Example.xcresult"
+
+default_platform :ios
+
+platform :ios do
+
+  ENV["FASTLANE_HIDE_CHANGELOG"] = "true"
+  ENV["FASTLANE_SKIP_UPDATE_CHECK"] = "true"
+
+  before_all do |lane, options|
+    # ensure_git_status_clean
+  end
+
+  ## Build section
+
+  desc "Собирает основной App для тестов"
+  desc "Параметры:
+  - clean: **true** если нужно очистить проект перед сборкой
+  "
+  lane :build do |options|
+    if options[:clean].nil?
+      throw "Missed required clean parameter"
+    end
+
+    match(readonly: true, type: "development", verbose: true)
+
+    scan(
+      workspace: workspace,
+      devices: ["iPhone 15"],
+      scheme: project_scheme,
+      clean: options[:clean],
+      code_coverage: true,
+      build_for_testing: true,
+      skip_build: false,
+      destination: "generic/platform=iOS Simulator",
+      derived_data_path: derived_data_path,
+      buildlog_path: 'build_logs',
+      xcargs: "-skipMacroValidation",
+      verbose: true
+	  )
+  end
+
+  desc "Прогоняет тесты основного приложения"
+  lane :tests do
+    scan(
+      workspace: workspace,
+      devices: ["iPhone 15"],
+      scheme: project_scheme,
+      code_coverage: true,
+      test_without_building: true,
+      skip_build: true,
+      prelaunch_simulator: true,
+      derived_data_path: derived_data_path,
+      result_bundle_path: result_bundle_path,
+      output_types: "html,junit"
+	  )
+  end
+
+end

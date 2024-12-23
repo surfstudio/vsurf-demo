@@ -1,0 +1,153 @@
+// MARK: - Error
+
+"Error.noInternetConnection" = "Connection failed. Please check your network connection, then try again";
+"Error.default" = "Something went wrong. Try again later";
+"Error.MultiStates.Internet.title" = "Connection failed";
+"Error.MultiStates.Internet.message" = "Please check your network connection and try again";
+"Error.MultiStates.Internet.button" = "Refresh";
+"Error.MultiStates.Other.title" = "Something went wrong";
+"Error.MultiStates.Other.message" = "Try refreshing the page";
+"Error.MultiStates.Other.button" = "Refresh";
+"Error.invalidUrl" = "We couldn't follow the link. Please try again later";
+"Error.UserBlocked" = "The access is temporarily blocked. Please try again later and contact support if the issue persists";
+"Error.OTPCodeInvalid" = "The code you have entered is invalid. Please try again";
+"Error.OTPCodeRequestsTooMany" = "You have run out of attempts. Please try again later and contact support if the issue persists";
+"Error.ForceLogout" = "Something went wrong... Please try getting authorized again";
+
+// MARK: - Shared
+
+// MARK: Action
+
+"Shared.Action.cancel" = "Cancel";
+"Shared.Action.close" = "Close";
+
+// MARK: TabBar
+
+"Shared.Tabbar.main" = "Home";
+"Shared.Tabbar.profile" = "Profile";
+
+// MARK: MultiStates
+
+"Shared.MultiStates.Empty.CitySearch.title" = "Nothing found";
+"Shared.MultiStates.Empty.CitySearch.message" = "Please double-check your spelling of the location";
+
+// MARK: TextFields
+
+"TextFields.phone" = "Phone number";
+"TextFields.sex" = "Sex";
+"TextFields.name" = "First name";
+"TextFields.surname" = "Last name";
+"TextFields.email" = "E-mail";
+"TextFields.promocode" = "Enter promo code";
+"TextFields.birthday" = "Date of birth";
+"TextFields.emptyError" = "This field is empty";
+"TextFields.lengthError" = "Please complete this field";
+"TextFields.validationError" = "Wrong format";
+"TextFields.requiredError" = "This field is required";
+"TextFields.Toolbar.doneButton" = "Done";
+"TextFields.Checkout.comment" = "Commentary about the order";
+
+// MARK: DefaultCity
+
+"DefaultCity.name" = "Moscow";
+
+// MARK: EmptyState
+
+"EmptyState.Shared.title" = "Oops! It's empty";
+"EmptyState.Shared.description" = "Try again later";
+
+// MARK: - Flows
+
+// MARK: - Main
+
+"Main.title" = "Main screen";
+"Main.hint" = "You can select a city";
+
+// MARK: - Onboarding
+
+"Onboarding.Button.next" = "Next";
+"Onboarding.Button.selectCity" = "Select the city";
+"Onboarding.Page1.title" = "Page one title";
+"Onboarding.Page1.message" = "Our store provides a large selection of practical goods at the most affordable price!";
+"Onboarding.Page2.title" = "Page two title";
+"Onboarding.Page2.message" = "Our store provides a large selection of practical goods at the most affordable price!";
+"Onboarding.Page3.title" = "Page three title";
+"Onboarding.Page3.message" = "Our store provides a large selection of practical goods at the most affordable price!";
+
+// MARK: - City
+
+"City.SearchBar.Placeholder" = "Find your city";
+"City.Selection.title" = "Selecting the city";
+
+// MARK: - Confirmation
+
+"Confirmation.Auth.title" = "Please enter\nthe SMS code.";
+"Confirmation.Auth.description" = "An SMS containing a verification code was sent to **%@**";
+"Confirmation.Auth.waitCode" = "Send new code in %@";
+"Confirmation.Auth.sendCode" = "Send new code";
+
+// MARK: - Login
+
+"Login.title" = "Log in or register";
+"Login.description" = "Enter your mobile number";
+"Login.actionButton" = "Request code";
+"Login.Terms.part1" = "By pressing «Request code« I accept ";
+"Login.Terms.part2" = "the Privacy policy";
+
+// MARK: - Profile
+
+"Profile.UnAuth.title" = "Log in or register";
+"Profile.UnAuth.action" = "Log in";
+"Profile.Auth.subtitle" = "My data";
+"Profile.Menu.city" = "City";
+"Profile.Menu.orders" = "My orders";
+"Profile.Menu.shops" = "Shops";
+"Profile.Menu.delivery" = "Delivery and payment";
+"Profile.Menu.contacts" = "Support chat";
+"Profile.Menu.information" = "Information";
+"Profile.Menu.logout" = "Log out";
+"Profile.Logout.Warning.text" = "Are you sure you want to leave your account?";
+"Profile.Logout.Warning.action" = "Leave";
+
+// MARK: - Contacts
+
+"Profile.Contacts.barTitle" = "Support chat";
+
+// MARK: - Profile User Data
+
+"Profile.UserData.title" = "My data";
+"Profile.UserData.deleteUser" = "Delete account";
+"Profile.UserData.SaveAction" = "Save";
+"Profile.UserData.Sex.title" = "Sex";
+"Profile.UserData.Sex.male" = "Male";
+"Profile.UserData.Sex.female" = "Female";
+"Profile.UserData.Warning.Delete.title" = "Are you sure you want to delete your account?";
+"Profile.UserData.Warning.Delete.description" = "All your orders and data will be deleted with no chance to recover";
+"Profile.UserData.Warning.Delete.action" = "Delete";
+"Profile.UserData.Snack.Delete.success" = "Your account will be deleted in 7 days";
+"Profile.UserData.Snack.Save.falied" = "We couldn't save it. Please try again";
+"Profile.UserData.ChangePhone.title" = "Note!";
+"Profile.UserData.ChangePhone.description" = "To change the number, you have to contact our customer support";
+"Profile.UserData.ChangePhone.action" = "Continue";
+"Profile.UserData.SaveData.success" = "Data saved successfully";
+
+// MARK: - DeliveryTerms
+
+"DeliveryTerms.title" = "Delivery and payment";
+
+// MARK: - Information
+
+"Information.title" = "Information";
+"Information.Items.termsOfUse" = "User agreement";
+"Information.Items.dataPolicy" = "Privacy policy";
+"Information.Items.contacts" = "Contacts and payment details";
+"Information.Items.aboutApp" = "About the app";
+
+// MARK: - AboutApp
+
+"AboutApp.title" = "About the app";
+"AboutApp.version" = "Version %@";
+
+// MARK: - PhotoViewer
+
+"PhotoViewer.title" = "%d out of %d";
