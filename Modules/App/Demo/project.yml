@@ -1,0 +1,87 @@
+include:
+  - path: ../templates.yml
+    relativePaths: true
+
+# Зависимости
+packages:
+  # Middle 
+  Library:
+    path: ../../Middle/Library
+    group: M1.Middle
+  # Flows
+  MVCFlow:
+    path: ../../Flows/MVC/MVCFlow
+    group: M3.Flows
+  MVPFlow:
+    path: ../../Flows/MVP/MVPFlow
+    group: M3.Flows
+  MVVMFlow:
+    path: ../../Flows/MVVM/MVVMFlow
+    group: M3.Flows
+  VIPERFlow:
+    path: ../../Flows/VIPER/VIPERFlow
+    group: M3.Flows
+  VSURFFlow:
+    path: ../../Flows/VSURF/VSURFFlow
+    group: M3.Flows
+  
+
+# Настройки проекта
+name: Demo
+options:
+  xcodeVersion: 15.3.0
+  # Создание пустых директорий
+  generateEmptyDirectories: true
+  # Создание групп
+  createIntermediateGroups: true
+settings:
+  DEVELOPMENT_TEAM: EFAAG9GXN4
+
+# Таргеты
+targets:
+
+    Demo:
+      scheme:
+          configVariants: all
+          testTargets:
+            - DemoUITests
+          gatherCoverageData: true
+      dependencies:
+        - package: MVCFlow
+          product: MVCFlow
+        - package: MVPFlow
+          product: MVPFlow
+        - package: MVVMFlow
+          product: MVVMFlow
+        - package: VIPERFlow
+          product: VIPERFlow
+        - package: VSURFFlow
+          product: VSURFFlow
+      sources:
+        - path: Sources
+      info:
+        path: Info.plist
+      templates:
+        - BaseApp
+        - BaseSettings
+      templateAttributes:
+        bundle_id: dev.surf.sui-core.Demo
+        bundle_name: SUI-Demo
+
+    DemoUITests:
+      templates:
+        - BaseUITest
+        - BaseSettings
+      templateAttributes:
+        bundle_id: dev.surf.sui-core.Demo-ui-tests
+      dependencies:
+        - target: Demo
+        - package: Library
+          product: LibraryTestSupport
+      sources: Tests/UI
+      info:
+        path: Tests/UI/Info.plist
+      settings:
+        configs:
+          Debug:
+            TEST_TARGET_NAME: Demo

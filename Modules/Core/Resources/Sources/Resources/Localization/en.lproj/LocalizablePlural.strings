@@ -1,0 +1,4 @@
+// MARK: Time
+
+"Time.After.seconds" = "%d";
+"Time.After.minutes" = "%d";

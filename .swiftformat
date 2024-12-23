@@ -1,0 +1,104 @@
+# SwiftFormat configuration file
+
+# Rules
+--rules                                \
+    acronyms,                          \
+    andOperator,                       \
+    anyObjectProtocol,                 \
+    applicationMain,                   \
+    assertionFailures,                 \
+    blankLineAfterImports,             \
+    blankLinesAroundMark,              \
+    blankLinesBetweenChainedFunctions, \
+    blankLinesBetweenImports,          \
+    blankLinesBetweenScopes,           \
+    blockComments,                     \
+    braces,                            \
+    conditionalAssignment,             \
+    consecutiveBlankLines,             \
+    consecutiveSpaces,                 \
+    consistentSwitchCaseSpacing,       \
+    duplicateImports,                  \
+    elseOnSameLine,                    \
+    emptyBraces,                       \
+    extensionAccessControl,            \
+    fileHeader,                        \
+    hoistPatternLet,                   \
+    initCoderUnavailable,              \
+    isEmpty,                           \
+    leadingDelimiters,                 \
+    linebreakAtEndOfFile,              \
+    modifierOrder,                     \
+    numberFormatting,                  \
+    opaqueGenericParameters,           \
+    redundantBackticks,                \
+    redundantBreak,                    \
+    redundantClosure,                  \
+    redundantExtensionACL,             \
+    redundantFileprivate,              \
+    redundantGet,                      \
+    redundantInit,                     \
+    redundantInternal,                 \
+    redundantLet,                      \
+    redundantLetError,                 \
+    redundantNilInit,                  \
+    redundantObjc,                     \
+    redundantOptionalBinding,          \
+    redundantParens,                   \
+    redundantPattern,                  \
+    redundantProperty,                 \
+    redundantRawValues,                \
+    redundantStaticSelf,               \
+    redundantType,                     \
+    redundantVoidReturnType,           \
+    semicolons,                        \
+    sortImports,                       \
+    spaceAroundBraces,                 \
+    spaceAroundBrackets,               \
+    spaceAroundComments,               \
+    spaceAroundGenerics,               \
+    spaceAroundOperators,              \
+    spaceAroundParens,                 \
+    spaceInsideBraces,                 \
+    spaceInsideBrackets,               \
+    spaceInsideComments,               \
+    spaceInsideGenerics,               \
+    spaceInsideParens,                 \
+    strongifiedSelf,                   \
+    todos,                             \
+    trailingClosures,                  \
+    trailingSpace,                     \
+    typeSugar,                         \
+    unusedArguments,                   \
+    void,                              \
+    wrapConditionalBodies,             \
+    wrapLoopBodies,                    \
+    wrapSingleLineComments,            \
+    yodaConditions
+
+# Options
+--swiftversion 5.9
+
+--redundanttype inferred
+
+--importgrouping testable-last
+
+--ranges no-space
+
+--patternlet inline
+
+--header \n Copyright © Surf. All rights reserved.\n
+
+# Excludes
+#
+# As for not .swift files:
+# 
+# We don't specify files to exclude;
+# Instead, we configure the runner script the way it checks only swift files
+# That have changed from last commit
+#
+# As for .swift file:
+#
+# We don't want to change generated file and docs files
+# We prefer to leave them as is.
+--exclude Modules/Core/Resources/Sources/Resources/**/*.swift,Modules/App/Playbook/Documentation,Modules/App/Example/Documentation

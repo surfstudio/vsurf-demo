@@ -1,0 +1,149 @@
+@Tutorial(time: 20) {
+    @Intro(title: "ViewState, UniversalState и ViewStateHolder") {
+        До SwiftUI вопрос наполнения View данными регламентировался по-разному, в зависимости от выбранной архитектуры.
+        В MVVM за это отвечает ViewModel, в MVP - Presenter и т.д.
+        
+        SwiftUI предлагает использовать для этого State-свойства, которые хранят данные и обновляют View при изменении.
+    }
+    
+    @Section(title: "Примеры организации ViewState") {
+        @ContentAndMedia {
+            Для маленьких View и переиспользуемых компонентов достаточно использовать `@State` и `@Binding`, но для больших и сложных экранов требуется масштабируемое решение, наподобие ViewModel. Поэтому мы придумали концепцию ViewState.
+            
+            Вы можете ознакомиться с диаграммой взаимодействия между сервисным слоем и View через ViewState на диаграмме.
+            
+            @Image(source: viewstate+flow.png, alt: "ViewState Flow cycle")
+        }
+        
+        @Steps {
+            @Step {
+                Рассмотрим простейший список.
+                
+                @Code(name: "TutorScreen.swift", file: ViewState-01-01.swift)
+            }
+            
+            @Step {
+                Очевидно, что в качестве ViewState можно выбрать массив заголовков.
+                
+                @Code(name: "TutorScreen.swift", file: ViewState-01-02.swift, previousFile: ViewState-01-01.swift)
+            }
+            
+            @Step {
+                ViewStateHolder в таком случае будет содержать одно `@Published` свойство - массив заголовков.
+                
+                Основная задача ViewStateHolder - подписаться на сервис и сконвертировать бизнес-модель в данные для View.
+                Обратите внимание, что ViewStateHolder является `ObservableObject`.
+                
+                @Code(name: "TutorScreen.swift", file: ViewState-01-03.swift, previousFile: ViewState-01-02.swift)
+            }
+            
+            @Step {
+                Это необходимо для того, чтобы в корневом View подключить ViewStateHolder как `@StateObject`.
+                
+                То есть, привязать цикл перерисовки View к изменениям внутри ViewStateHolder.
+                
+                @Code(name: "TutorScreen.swift", file: ViewState-01-04.swift, previousFile: ViewState-01-03.swift)
+            }
+            
+            @Step {
+                Для того, чтобы добавить на наш экран обработку ошибок и состояния загрузки, можно использовать `UniversalState`.
+                
+                Эта обертка раскрывается в момент вызова `viewState.buildView`. Она основана на `@ViewBuilder` функции, которая вставит заранее заготовленные View, в соответствии с текущим ViewState.
+                
+                @Code(name: "TutorScreen.swift", file: ViewState-01-05.swift, previousFile: ViewState-01-04.swift)
+            }
+            
+            @Step {
+                Симуляция получения массива заголовков из сети может выглядеть так.
+                
+                @Code(name: "TutorScreen.swift", file: ViewState-01-06.swift, previousFile: ViewState-01-05.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Примеры обмена данными между View и State через ViewStateHolder") {
+        @ContentAndMedia {
+            На уровне Flow модули начинают делиться горизонтально на UI часть и State.
+            
+            Введем понятие Unit для обозначения объекта, который будет формировать Business-State.
+            Это может быть обертка над клиентом сетевого слоя, хранилищем или любым другим сервисом.
+            
+            ViewStateHolder будет преобразовывать данные из Unit в данные для View. View будет обращаться к Unit через WeakReference на вспомогательный протокол.
+            
+            @Image(source: viewstateholder+unit.png, alt: "ViewStateHolder and Unit place")
+        }
+        
+        @Steps {
+            @Step {
+                Рассмотрим пример чуть сложнее предыдущего.
+                
+                Тот же список, но с возможностью выбора элементов из списка.
+                
+                @Code(name: "TutorScreen.swift", file: ViewState-02-01.swift)
+            }
+            
+            @Step {
+                Смоделлируем Unit сервис этого State-модуля.
+                
+                Для получения списка мы обращаемся к сети.
+                Ошибки оставляем в результирующем `AnyPublisher`.
+                
+                @Code(name: "TutorUnit.swift", file: ViewState-02-02.swift, reset: true)
+            }
+            
+            @Step {
+                Выбор элемента обрабатываем как входящую команду. 
+                Записываем в `PassthroughSubject`. Старт загрузки списка - тоже команда. 
+                
+                @Code(name: "TutorUnit.swift", file: ViewState-02-03.swift, previousFile: ViewState-02-02.swift)
+            }
+            
+            @Step {
+                Комбинируем цепочки. Кэшируем приходящий список в `CurrentValueSubject`.
+                
+                Не инициализируем `cancellable` и не вызываем `sink` на этом уровне.
+                Используем `flatMap`, `map` и `handleEvents` для преобразований.
+                
+                @Code(name: "TutorUnit.swift", file: ViewState-02-04.swift, previousFile: ViewState-02-03.swift)
+            }
+            
+            @Step {
+                Добавляем отслеживание загрузки списка.
+                
+                @Code(name: "TutorUnit.swift", file: ViewState-02-05.swift, previousFile: ViewState-02-04.swift)
+            }
+            
+            @Step {
+                Обрабатываем результат Unit в ViewStateHolder.
+                
+                Подписываемся на результат и на `processing`, чтобы обработка команды выполнилась.
+                
+                @Code(name: "TutorStateHolder.swift", file: ViewState-02-06.swift, reset: true)
+            }
+            
+            @Step {
+                Обрабатываем ошибки.
+                
+                @Code(name: "TutorStateHolder.swift", file: ViewState-02-07.swift, previousFile: ViewState-02-06.swift)
+            }
+            
+            @Step {
+                Отслеживаем стейт загрузки.
+                
+                @Code(name: "TutorStateHolder.swift", file: ViewState-02-08.swift, previousFile: ViewState-02-07.swift)
+            }
+            
+            @Step {
+                Прикрепляем ViewStateHolder к View.
+                
+                @Code(name: "TutorScreen.swift", file: ViewState-02-09.swift, previousFile: ViewState-02-01.swift)
+            }
+            
+            @Step {
+                Устанавливаем Weakreference на Unit во View.
+                
+                @Code(name: "TutorScreen.swift", file: ViewState-02-10.swift, previousFile: ViewState-02-09.swift)
+            }
+        }
+    }
+}

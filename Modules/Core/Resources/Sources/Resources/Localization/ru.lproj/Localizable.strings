@@ -1,0 +1,153 @@
+// MARK: - Error
+
+"Error.noInternetConnection" = "Нет соединения. Проверьте соединение с интернетом и попробуйте позже";
+"Error.default" = "Что-то пошло не так. Попробуйте позже";
+"Error.MultiStates.Internet.title" = "Нет соединения";
+"Error.MultiStates.Internet.message" = "Проверьте соединение с интернетом и попробуйте позже";
+"Error.MultiStates.Internet.button" = "Обновить";
+"Error.MultiStates.Other.title" = "Что-то пошло не так";
+"Error.MultiStates.Other.message" = "Попробуйте обновить страницу";
+"Error.MultiStates.Other.button" = "Обновить";
+"Error.invalidUrl" = "Не удалось перейти по ссылке. Попробуйте позже";
+"Error.UserBlocked" = "Вход временно заблокирован. Попробуйте позже, если проблема останется – обратитесь в поддержку";
+"Error.OTPCodeInvalid" = "Введен неверный код, попробуйте еще раз";
+"Error.OTPCodeRequestsTooMany" = "Вы исчерпали лимит попыток. Попробуйте позже, если проблема останется – обратитесь в поддержку";
+"Error.ForceLogout" = "Что-то пошло не так... Попробуйте авторизоваться повторно";
+
+// MARK: - Shared
+
+// MARK: Action
+
+"Shared.Action.cancel" = "Отмена";
+"Shared.Action.close" = "Закрыть";
+
+// MARK: TabBar
+
+"Shared.Tabbar.main" = "Главная";
+"Shared.Tabbar.profile" = "Профиль";
+
+// MARK: MultiStates
+
+"Shared.MultiStates.Empty.CitySearch.title" = "Ничего не найдено";
+"Shared.MultiStates.Empty.CitySearch.message" = "Проверьте, правильно ли вы написали\nназвание населённого пункта";
+
+// MARK: TextFields
+
+"TextFields.phone" = "Номер телефона";
+"TextFields.sex" = "Пол";
+"TextFields.name" = "Имя";
+"TextFields.surname" = "Фамилия";
+"TextFields.email" = "Почта";
+"TextFields.promocode" = "Введите промокод";
+"TextFields.birthday" = "Дата рождения";
+"TextFields.emptyError" = "Поле не заполнено";
+"TextFields.lengthError" = "Заполните поле полностью";
+"TextFields.validationError" = "Неверный формат";
+"TextFields.requiredError" = "Обязательное поле";
+"TextFields.Toolbar.doneButton" = "Готово";
+"TextFields.Checkout.comment" = "Комментарий к заказу";
+
+// MARK: DefaultCity
+
+"DefaultCity.name" = "Москва";
+
+// MARK: EmptyState
+
+"EmptyState.Shared.title" = "Упс! Тут пусто";
+"EmptyState.Shared.description" = "Попробуйте позже";
+
+// MARK: - Flows
+
+// MARK: - Main
+
+"Main.title" = "Главный экран";
+"Main.hint" = "Можно поменять город";
+
+// MARK: - Onboarding
+
+"Onboarding.Button.next" = "Далее";
+"Onboarding.Button.selectCity" = "Выбрать город";
+"Onboarding.Page1.title" = "Заголовок первого слайда";
+"Onboarding.Page1.message" = "В нашем магазине вы найдете большое количество полезных товаров по самым доступным ценам!";
+"Onboarding.Page2.title" = "Заголовок второго слайда";
+"Onboarding.Page2.message" = "В нашем магазине вы найдете большое количество полезных товаров по самым доступным ценам!";
+"Onboarding.Page3.title" = "Заголовок третьего слайда";
+"Onboarding.Page3.message" = "В нашем магазине вы найдете большое количество полезных товаров по самым доступным ценам!";
+
+// MARK: - City
+
+"City.SearchBar.Placeholder" = "Найти город";
+"City.Selection.title" = "Выбор города";
+
+// MARK: - Confirmation
+
+"Confirmation.Auth.title" = "Введите код\nиз SMS-сообщения";
+"Confirmation.Auth.description" = "На номер **%@** выслано сообщение с SMS-кодом";
+"Confirmation.Auth.waitCode" = "Следующий код через %@";
+"Confirmation.Auth.sendCode" = "Получить новый код";
+
+// MARK: - Login
+
+"Login.title" = "Войти или зарегистрироваться";
+"Login.description" = "Укажите ваш номер телефона";
+"Login.actionButton" = "Получить код";
+"Login.Terms.part1" = "Нажимая на кнопку «Получить код», я соглашаюсь с ";
+"Login.Terms.part2" = "политикой персональных данных";
+
+// MARK: - Profile
+
+"Profile.UnAuth.title" = "Войдите\nили зарегистрируйтесь";
+"Profile.UnAuth.action" = "Войти";
+"Profile.Auth.subtitle" = "Мои данные";
+"Profile.Menu.city" = "Город";
+"Profile.Menu.orders" = "Мои заказы";
+"Profile.Menu.shops" = "Магазины";
+"Profile.Menu.delivery" = "Доставка и оплата";
+"Profile.Menu.contacts" = "Чат с поддержкой";
+"Profile.Menu.information" = "Информация";
+"Profile.Menu.logout" = "Выйти";
+"Profile.Logout.Warning.text" = "Вы действительно хотите выйти из аккаунта?";
+"Profile.Logout.Warning.action" = "Выйти";
+
+// MARK: - Contacts
+
+"Profile.Contacts.barTitle" = "Чат с поддержкой";
+
+// MARK: - Profile User Data
+
+"Profile.UserData.title" = "Мои данные";
+"Profile.UserData.deleteUser" = "Удалить аккаунт";
+"Profile.UserData.SaveAction" = "Сохранить";
+"Profile.UserData.Sex.title" = "Пол";
+"Profile.UserData.Sex.male" = "Мужской";
+"Profile.UserData.Sex.female" = "Женский";
+"Profile.UserData.Warning.Delete.title" = "Вы действительно хотите удалить аккаунт?";
+"Profile.UserData.Warning.Delete.description" = "Все ваши заказы и данные будут удалены. Восстановить их будет невозможно";
+"Profile.UserData.Warning.Delete.action" = "Удалить";
+"Profile.UserData.Snack.Delete.success" = "Ваш аккаунт будет удален через 7 дней";
+"Profile.UserData.Snack.Save.falied" = "Не удалось сохранить. Попробуйте ещё раз";
+"Profile.UserData.ChangePhone.title" = "Внимание";
+"Profile.UserData.ChangePhone.description" = "Для изменения номера, необходимо обратиться в службу поддержки";
+"Profile.UserData.ChangePhone.action" = "Перейти";
+"Profile.UserData.SaveData.success" = "Данные успешно сохранены";
+
+// MARK: - DeliveryTerms
+
+"DeliveryTerms.title" = "Доставка и оплата";
+
+// MARK: - Information
+
+"Information.title" = "Информация";
+"Information.Items.termsOfUse" = "Пользовательское соглашение";
+"Information.Items.dataPolicy" = "Политика персональных данных";
+"Information.Items.contacts" = "Контакты и реквизиты";
+"Information.Items.aboutApp" = "О приложении";
+
+// MARK: - AboutApp
+
+"AboutApp.title" = "О приложении";
+"AboutApp.version" = "Версия %@";
+
+// MARK: - PhotoViewer
+
+"PhotoViewer.title" = "%d из %d";

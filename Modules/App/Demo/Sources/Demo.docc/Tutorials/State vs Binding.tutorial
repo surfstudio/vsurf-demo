@@ -1,0 +1,135 @@
+@Tutorial(time: 10) {
+    @Intro(title: "State vs Binding") {
+        В SwiftUI есть два способа передачи данных между вью и моделью. Это `@State` и `@Binding`. Оба этих свойства позволяют изменять значения внутри вью, но есть некоторые отличия.
+        
+        В каких случаях применять State, а в каких Binding разберем на примерах в этом уроке.
+        
+        
+    }
+    
+    @Section(title: "Применение и возможности State") {
+        @ContentAndMedia {
+            State используется для хранения данных внутри вью.
+            
+            Каждое изменение State запускает перерисовку вью.
+        }
+        
+        @Steps {
+            @Step {
+                Рассмотрим простейшее поле ввода.
+                
+                `$text` "превращает" наш локальный State в `Binding<String>`, так как State представляет собой propertyWrapper, projectedValue которого и есть Binding.
+                
+                @Code(name: "TutorForm.swift", file: StateOrBinding-01-01.swift)
+            }
+
+            @Step {
+                Добавим установку начального значения через init.
+                
+                Это все возможности регулировки State извне.
+                
+                @Code(name: "TutorForm.swift", file: StateOrBinding-01-02.swift, previousFile: StateOrBinding-01-01.swift)
+            }
+            
+            @Step {
+                Можно переписать init с инициализатором State.
+                
+                Результат будет тем же.
+                
+                @Code(name: "TutorForm.swift", file: StateOrBinding-01-03.swift, previousFile: StateOrBinding-01-02.swift)
+            }
+            
+            @Step {
+                Для отслеживания изменений свойств можно использовать модификатор `onChange`, достпуный из коробки.
+                
+                @Code(name: "TutorForm.swift", file: StateOrBinding-01-04.swift, previousFile: StateOrBinding-01-03.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Применение и возможности Binding") {
+        @ContentAndMedia {
+            Binding используется для передачи данных между View.
+            
+            Аналогично State, Binding запускает перерисовку вью при изменении значения.
+        }
+        
+        @Steps {
+            @Step {
+                Перепишем поле ввода с использованием Binding.
+                
+                ProjectedValue у Binding остается Binding. Изменяется тип параметра для начального значения на `Binding<String>`
+                
+                @Code(name: "TutorForm.swift", file: StateOrBinding-02-01.swift)
+            }
+            
+            @Step {
+                Обратимся к нашему полю ввода из другой View.
+                
+                Binding позволяет нам установить константное значение, что очень полезно при тестировании.
+                
+                @Code(name: "TestView.swift", file: StateOrBinding-02-02.swift, reset: true)
+            }
+            
+            @Step {
+                С Binding мы можем привязать значение к другому State или Binding. 
+                
+                @Code(name: "TestView.swift", file: StateOrBinding-02-03.swift, previousFile: StateOrBinding-02-02.swift)
+            }
+            
+            @Step {
+                Или связать значение с `Published` свойтсвом какого-нибудь сервиса, формирующего State для View.
+                
+                @Code(name: "TestView.swift", file: StateOrBinding-02-04.swift, previousFile: StateOrBinding-02-03.swift)
+            }
+        }
+    }
+    
+    @Assessments {
+        @MultipleChoice {
+            Дана View с полем ввода. Оформляем эту View как отдельный компонент. 
+            Какой тип свойства использовать для хранения значения поля?
+            
+            @Comment("Добавить иллюстрацию")
+            
+            @Choice(isCorrect: true) {
+                Binding
+                
+                @Justification(reaction: "Верно") {
+                    Используя Binding, мы сможем передать значение в другую View
+                }
+            }
+            
+            @Choice(isCorrect: false) {
+                State
+                
+                @Justification(reaction: "Не совсем") {
+                    Используя State, мы не сможем передать значение в другую View. То есть не сможем оформить его как отдельный компонент.
+                }
+            }
+        }
+        
+        @MultipleChoice {
+            Дана View с кастомной анимацией на кнопке. Какой тип свойства использовать для хранения состояния анимации?
+            
+            @Comment("Добавить иллюстрацию")
+            
+            @Choice(isCorrect: false) {
+                Binding
+                
+                @Justification(reaction: "Врядли пригодится") {
+                    Binding тут избыточен. Маловероятен случай, когда нам нужно передавать это значение в другую View или менять извне. 
+                }
+            }
+            
+            @Choice(isCorrect: true) {
+                State
+                
+                @Justification(reaction: "Верно") {
+                    Анимация это ограниченное по времени событие. Идеальный пример внутреннего State без оговорок. 
+                }
+            }
+        }
+    }
+    
+}

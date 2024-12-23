@@ -1,0 +1,46 @@
+name: BaseSetting
+targetTemplates:
+
+#  Базовый шаблон с настройками
+    BaseApp:
+      type: application
+      platform: iOS
+      deploymentTarget: 16.0
+      scheme:
+        configVariants: all
+        gatherCoverageData: true
+      info:
+        properties:
+          CFBundleName: ${bundle_name}
+          CFBundleShortVersionString: $(MARKETING_VERSION)
+          CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+          CFBundleAllowMixedLocalizations: true
+          UILaunchScreen:
+            UIImageName: launchLogo
+
+    BaseUITest:
+        type: bundle.ui-testing
+        platform: iOS
+        deploymentTarget: 16.0
+        scheme:
+          configVariants: all
+          gatherCoverageData: true
+
+    BaseSettings:
+      settings:
+        base:
+          PRODUCT_BUNDLE_IDENTIFIER: ${bundle_id}
+          MARKETING_VERSION: "0.0.1"
+          CURRENT_PROJECT_VERSION: 0
+          VERSIONING_SYSTEM: "apple-generic"
+          DEBUG_INFORMATION_FORMAT: dwarf-with-dsym
+          LD_RUNPATH_SEARCH_PATHS: "$(inherited) @executable_path/Frameworks @loader_path/Frameworks"
+          CODE_SIGN_IDENTITY: None
+          CODE_SIGN_STYLE: Manual
+        configs:
+          Debug:
+            CODE_SIGN_IDENTITY: iPhone Developer
+            PROVISIONING_PROFILE_SPECIFIER: Surf Wildcard Dev
+          Release:
+            CODE_SIGN_IDENTITY: iPhone Distribution
+            PROVISIONING_PROFILE_SPECIFIER: Surf Wildcard Release

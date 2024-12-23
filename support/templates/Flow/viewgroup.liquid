@@ -1,0 +1,30 @@
+import PreviewSnapshots
+import Resources
+import SwiftUI
+
+public struct {{ name }}ViewGroup: View {
+
+    // MARK: - State
+
+    @State private var navigationState: {{ name }}NavigationState = .initial
+
+    // MARK: - Init
+
+    // точка входа в модуль всегда должна иметь публичный init без параметров
+    public init() { }
+
+    // MARK: - View
+
+    public var body: some View {
+        NavigationStack(path: $navigationState.navigationPath) {
+            Text("{{ name }} заглушка титульника модуля")
+            .navigationDestination(for: {{ name }}NavigationState.Destination.self) { destination in
+                // TODO: - реализуйте обработку навигации
+                EmptyView()
+            }
+        }
+        .navigationTitle("Заголовок модуля")
+        
+    }
+
+}

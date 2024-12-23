@@ -1,0 +1,56 @@
+@Tutorial(time: 10) {
+    @Intro(title: "Горизонтальный стек - push/pop") {
+        Начиная с iOS 16, в SwiftUI доступен `NavigationStack`, который позволяет управлять навигацией в приложении.
+        
+        Удобнее всего использовать его вместе с `NavigationPath`, который позволяет описывать пути навигации.
+        Проблема заключается лишь в том, что `NavigationPath` анонимен, поэтому мы ввели структуру `NavigationState`, которая позволяет обозначить возможные пути навигации.
+    }
+    
+    @Section(title: "Пример использования NavigationState") {
+        @ContentAndMedia {
+            `NavigationState` это структура с вложенным enum `Destination`, который содержит все возможные пути навигации.
+            
+            Хранение текущего `NavigationPath` и переход на новый путь осуществляется с помощью макроса `@NavigationState`.
+            
+            Остается лишь обработать изменения destination в `NavigationStack`.
+            
+            @Video(source: navigationstate-preview.mp4, alt: "Демонстрация работы NavigationState")
+        }
+        
+        @Steps {
+            @Step {
+                Создадим `NavigationState` и добавим в него несколько путей навигации.
+                
+                @Code(name: "TutorNavigationState.swift", file: NavigationState-01-01.swift)
+            }
+            
+            @Step {
+                Если раскрыть макрос, вы увидете `NavigationPath` и функции для его модификации.
+                
+                На данный момент SwiftUI не позволяет нам сделать `popTo(destination:)`, из-за ограничений `NavigationPath` и невозможности обратиться к стеку по индексу.
+                
+                @Code(name: "TutorNavigationState.swift", file: NavigationState-01-02.swift, previousFile: NavigationState-01-01.swift)
+            }
+            
+            @Step {
+                Подключим наш `NavigationState` к `NavigationStack`. 
+                
+                Не запутайтесь в скобочках. Важно, чтобы модификатор `navigationDestination` был внутри `NavigationStack`.
+                
+                @Code(name: "TutorViewGroup.swift", file: NavigationState-01-03.swift, reset: true)
+            }
+            
+            @Step {
+                Переключим навигацию, с помощью метода `push`.
+                
+                @Code(name: "TutorViewGroup.swift", file: NavigationState-01-04.swift, previousFile: NavigationState-01-03.swift)
+            }
+            
+            @Step {
+                Аналогично можем менять `navigationState` через Binding.
+                
+                @Code(name: "TutorView.swift", file: NavigationState-01-05.swift)
+            }
+        }
+    }
+}

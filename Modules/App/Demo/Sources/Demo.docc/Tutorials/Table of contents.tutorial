@@ -1,0 +1,24 @@
+@Tutorials(name: "Оглавление") {
+    @Intro(title: "Обучающие материалы по VSURF") {
+        
+    }
+    
+    @Chapter(name: "Связь между модулями и View") {
+        
+        @TutorialReference(tutorial: "doc:Facade")
+        @TutorialReference(tutorial: "doc:Environment+Weak")
+        @TutorialReference(tutorial: "doc:Signals")
+    }
+    
+    @Chapter(name: "Внутренний и внешний State") {
+        
+        @TutorialReference(tutorial: "doc:State-vs-Binding")
+        @TutorialReference(tutorial: "doc:ViewState-+-ViewStateHolder")
+    }
+    
+    @Chapter(name: "Навигация") {
+        
+        @TutorialReference(tutorial: "doc:NavigationState")
+        @TutorialReference(tutorial: "doc:PresentationState")
+    }
+}

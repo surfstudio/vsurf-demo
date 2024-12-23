@@ -1,0 +1,232 @@
+@Tutorial(time: 15) {
+    @Intro(title: "Применение Environment") {
+        Environment занимает не последнее место в SwiftUI. Он позволяет передавать значения вниз по иерархии представлений, не заботясь о том, как это сделать. В этом уроке мы рассмотрим варианты использования Environment. 
+    }
+
+    @Section(title: "Передача значений") {
+
+        @ContentAndMedia {
+            С помощью Environment можно передавать постоянные значения, такие как `placeholder`, `hint` и т.д.
+            
+            Не стоит пытаться передавать так динамические объекты или state. Обновление значений в environment не отразится на `View`.
+        }
+
+        @Steps {
+            @Step {
+                Определим `EnvironmentKey`
+                
+                @Code(name: "PlaceholderValue.swift", file: Environment-01-01.swift)
+            }
+            
+            @Step {
+                Зарегистрируем значением в `EnvironmentValues` и определим значение по умолчанию
+                
+                @Code(name: "PlaceholderValue.swift", file: Environment-01-02.swift, previousFile: Environment-01-01.swift)
+            }
+            
+            @Step {
+                Добавим короткий способ для установки значений в environment
+                
+                @Code(name: "PlaceholderValue.swift", file: Environment-01-03.swift, previousFile: Environment-01-02.swift)
+            }
+            
+            @Step {
+                Проверим на простеньком View с полем ввода
+                
+                @Code(name: "TutorView.swift", file: Environment-01-04.swift, reset: true) {
+                    @Image(source: "preview-Environment-01-04.png", alt: "Тестовое поле ввода")
+                }
+            }
+            
+            @Step {
+                Добавим установку значения плейсхолдера из `Environment`
+                
+                @Code(name: "TutorView.swift", file: Environment-01-05.swift, previousFile: Environment-01-04.swift) {
+                    @Image(source: "preview-Environment-01-05.png", alt: "Тестовое поле ввода")
+                }
+            }
+            
+            @Step {
+                Установим один плейсхолдер на несколько полей
+                
+                @Code(name: "FormView.swift", file: Environment-01-06.swift, reset: true) {
+                    @Image(source: "preview-Environment-01-06.png", alt: "Тестовая форма")
+                }
+            }
+            
+            @Step {
+                Или индивидуальные плейсхолдеры
+                
+                @Code(name: "FormView.swift", file: Environment-01-07.swift, previousFile: Environment-01-06.swift) {
+                    @Image(source: "preview-Environment-01-07.png", alt: "Тестовая форма")
+                }
+            }
+        }
+    }
+    
+    @Section(title: "Передача стилей") {
+        
+        @ContentAndMedia {
+            В предыдущей секции мы показали как передавать элементарные значения, но можно ли передавать что-то более сложное?
+            
+            **Конечно**. 
+            
+            Можно передавать любой объект, которому мы можем определить значение по умолчанию.
+            
+            Сам объект не должен зависеть от State, однако он может иметь функции, которые меняют возвращаемое значение на основе составляющих State.
+            
+            Подробнее в этой секции.
+        }
+        
+        @Steps {
+            @Step {
+                Допустим, мы хотим стилизовать кастомный TabBar. 
+                Определяем протокол стиля с двумя `@ViewBuilder` функциями. 
+
+                `makeItem` для модификации View элемента. 
+                `makeContainer` для модификации View контейнера 
+                
+                @Code(name: "TabBarViewStyle.swift", file: Environment-02-01.swift)
+            }
+            
+            @Step {
+                Заполним `EnvironmentKey` и `EnvironmentValues` как в предыдущей секции.
+                
+                Ссылаемся на `any TabBarViewStyle`, так как мы пока не знаем, какой именно стиль будет установлен.
+                
+                @Code(name: "TabBarViewStyle.swift", file: Environment-02-02.swift, previousFile: Environment-02-01.swift)
+            }
+            
+            @Step {
+                Не будем сильно углубляться в верстку `TabBarView`, но отметим, что для раскрытия стиля приходится оборачивать результат `makeItem` и `makeContainer` в `AnyView` для совместимости различных стилей. 
+                
+                В SwiftUI любой модификатор над View возвращает измененное View, поэтому без этой трансформации абстрактный стиль не применить. Без `AnyView` просто не скомпилится.
+                
+                @Code(name: "TabBarView.swift", file: Environment-02-03.swift, reset: true)
+            }
+            
+            @Step {
+                В итоге получаем классический tabBar
+                
+                @Code(name: "TutorView.swift", file: Environment-02-04.swift, reset: true) {
+                    @Image(source: "preview-Environment-02-04.png", alt: "Классический tabBar")
+                }
+            }
+            
+            @Step {
+                И современный вариант. 
+                
+                Полный вариант реализации вы можете посмотреть в Library модуле.
+                
+                @Code(name: "TutorView.swift", file: Environment-02-05.swift, previousFile: Environment-02-04.swift) {
+                    @Image(source: "preview-Environment-02-05.png", alt: "Парящий tabBar")
+                }
+            }
+        }
+        
+    }
+    
+    @Section(title: "Weak - Наша альтернатива EnvironmentObject") {
+        
+        @ContentAndMedia {
+            `EnvironmentObject`, также как и `EnvironmentValues`, распространяется между View через ViewTree. 
+            Он позволяет делиться объектами `ObservableObject` между несколькими View.
+            Этот объект может содержать `Published` свойства, из которых могут формироваться State конкретных View, а также принимать сигналы для изменения состояния.
+            
+            В: Почему мы не используем `EnvironmentObject`?
+            
+            О: Не хотим зависеть от конкретного объекта
+            
+            Завязка на объекте может привести к проблемам при тестировании, а также к проблемам при изменении объекта.
+            Подробнее о причинах и об альтернативном решении мы расскажем в секции.
+        }
+        
+        @Steps {
+            @Step {
+                Представим экран Onboarding. 
+                Существует некоторое хранилище статуса просмотра онбоардинга, которое View получает через `@EnvironmentObject`.`
+                
+                @Code(name: "OnboardingView.swift", file: Environment-03-01.swift)
+            }
+            
+            @Step {
+                Где-то в App это хранилище создается фабрикой, хранится и регистрируется в Environment.
+                
+                Проблема в том, что регистрация происходит по классу реализации.
+                
+                @Code(name: "TutorApp.swift", file: Environment-03-02.swift, reset: true)
+            }
+            
+            @Step {
+                Таким образом, даже когда мы разделяем хранилище на несколько протоколов, мы все равно должны регистрировать его по конкретному классу. И никак иначе.
+                
+                А что если мы всё-таки хотим разделить ответственность между разными View?
+                Например, в App хотим проверять статус, а в `OnboardingView` использовать протокол `OnboardingFlowSignal` для оповещения о завершении прохода Onboarding-а.
+                
+                @Code(name: "TabBarView.swift", file: Environment-03-03.swift, reset: true)
+            }
+            
+            @Step {
+                Для этих целей мы написали propertyWrapper `@Weak`.
+                
+                Он позволяет нам получить слабую ссылку на объект, внутри любой View.
+                
+                @Code(name: "OnboardingView.swift", file: Environment-03-04.swift, previousFile: Environment-03-01.swift)
+            }
+            
+            @Step {
+                А регистрация объекта производится по требуемому протоколу.
+                
+                Синтаксис схож с тем, что мы использовали для `@EnvironmentObject`.
+                
+                @Code(name: "TutorApp.swift", file: Environment-03-05.swift, previousFile: Environment-03-02.swift)
+            }
+        }
+        
+    }
+        
+    @Assessments {
+        @MultipleChoice {
+            Какие значения можно передавать через EnvironmentValues?
+            
+            @Choice(isCorrect: true) {
+                Константы, Стили
+                
+                @Justification(reaction: "Ты прав!") {
+                    Это основное назначение Environment
+                }
+            }
+            
+            @Choice(isCorrect: false) {
+                State, Binding
+                
+                @Justification(reaction: "Ну нет") {
+                    Так не будет работать. 
+                    Перечитай первый раздел, чтобы освежить память.
+                }
+            }
+            
+            @Choice(isCorrect: false) {
+                AnyPublisher
+                
+                @Justification(reaction: "Ну нет") {
+                    Передать его можно, но 
+                    - Какое у него будет значение по умолчанию? 
+                    - В какой момент мы подпишемся на этот Publisher?
+                    - Какое значение получим при подписке?
+                    
+                    Слишком много вопросов, и так мало ответов.
+                }
+            }
+            
+            @Choice(isCorrect: false) {
+                Объекты ObservableObject
+                
+                @Justification(reaction: "И да и нет") {
+                    Для передачи этих объектов существует `EnvironmentObject`.
+                    Он тоже использует Environment, но вместо пары Key/Value регистрирует объекты по классу.
+                }
+            }
+        }
+    }
+}

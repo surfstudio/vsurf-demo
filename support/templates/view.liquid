@@ -1,0 +1,38 @@
+import PreviewSnapshots
+import Resources
+import SwiftUI
+
+public struct {{ name }}: View {
+
+    // MARK: - Body
+
+    public var body: some View {
+        EmptyView()
+    }
+
+}
+
+// MARK: - Preview
+
+struct {{ name }}_Previews: PreviewProvider {
+
+    enum Preset: String, CaseIterable {
+        // для создания вью на основе данных из figma
+        case figma
+    }
+
+    static var previews: some View {
+        snapshots.previews
+    }
+
+    static var snapshots: PreviewSnapshots<Preset> {
+        return PreviewSnapshots(states: Preset.allCases,
+                                name: \.rawValue,
+                                configure: { preset in
+            switch preset {
+            case .figma:
+                {{ name }}()
+            }
+        })
+    }
+}

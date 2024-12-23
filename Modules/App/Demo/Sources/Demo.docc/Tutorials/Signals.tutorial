@@ -1,0 +1,73 @@
+@Tutorial(time: 10) {
+    @Intro(title: "Оповещение других модулей") {
+        Сущность `Signal` это протокол, используемый для оповещения модулей верхнего уровня о **событиях**, происходящих в других модулях.
+        
+    }
+    
+    @Section(title: "Пример отправки и обработки сигнала") {
+
+        @ContentAndMedia {
+            
+            Под событиями подразумевается окончание какого-либо Flow. 
+            
+            Например: 
+            
+            - просмотр последнего экрана онбоардинга
+            - успешная авторизация
+            - разлогин (авторизация с протухшим токеном)
+            - тап по кнопке, являющейся точкой входа в другой Flow
+            
+            и т.д.
+            
+            Текущий Flow уже не может обработать событие. Это вне его зоны ответственности. Поэтому он оповещает об этом другие модули.
+        }
+
+        @Steps {
+            @Step {
+                Определим `TutorSignal` протокол для экрана обучения.
+                
+                Сигнальный протокол должен быть максимально простым. Без assotiatedType и свойств.
+                Только методы. Параметры методов допускаются.
+                
+                @Code(name: "TutorSignal.swift", file: Signals-01-01.swift)
+            }
+            
+            @Step {
+                
+                Применим макрос `Multicast` из `SurfMacros` для комбинирования сигналов, что пригодится в будущем.
+                
+                @Code(name: "TutorSignal.swift", file: Signals-01-02.swift, previousFile: Signals-01-01.swift)
+            }
+            
+            @Step {
+                Закрепим во View точки срабатывания сигналов
+                
+                Как правило это кнопки
+                
+                @Code(name: "TutorView.swift", file: Signals-01-03.swift, reset: true)
+            }
+            
+            @Step {
+                Сверстаем приложение с TutorView и условным MainView
+                
+                @Code(name: "AppLaunchInstructor.swift", file: Signals-01-04.swift, reset: true)
+            }
+            
+            @Step {
+                Добавим реализацию сигнала, в которой после завершения тутора будет открываться mainFlow
+                
+                @Code(name: "AppLaunchInstructor.swift", file: Signals-01-05.swift, previousFile: Signals-01-04.swift)
+            }
+            
+            @Step {
+                Инжектируем реализацию как weakReference
+                
+                Обратите внимание на `TutorSignals`. Этот сигнал является продуктом макроса `Multicast`. Он служит для комбинации нескольких реализаций одного сигнального протокола.
+                
+                @Code(name: "TutorApp.swift", file: Signals-01-06.swift, reset: true)
+            }
+            
+        }
+    }
+    
+}
