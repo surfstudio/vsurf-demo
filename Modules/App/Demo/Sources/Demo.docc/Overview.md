@@ -66,3 +66,26 @@
     - <doc:FlowUI>
     - <doc:App>
 }
+
+## Обучающие материалы
+
+### Связь между модулями и View
+
+@Links(visualStyle: list) {
+    - <doc:Facade>
+    - <doc:Environment+Weak>
+    - <doc:Signals>
+}
+
+### Внутренний и внешний State
+
+@Links(visualStyle: list) {
+    - <doc:State-vs-Binding>
+    - <doc:ViewState-+-ViewStateHolder>
+}
+
+### Навигация
+
+@Links(visualStyle: list) {
+    - <doc:NavigationState>
+}
